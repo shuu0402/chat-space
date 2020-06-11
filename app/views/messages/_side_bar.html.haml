@@ -1,0 +1,19 @@
+.SideBar
+  .user-name
+    .user-name__list
+      %h1.user-name__Name
+        ユーザー名
+      %ul.user-name__iconList
+        %li.user-name__Icon
+          = link_to '#' do
+            = icon('fas', 'edit')
+        %li.user-name__Icon
+          = link_to '#' do
+            = icon('fas', 'cog')
+  .GroupList
+    .Group-name
+      = link_to '#' do
+        .Group-name__name
+          グループ名
+        .Group-name__message
+          最新のメッセージ
