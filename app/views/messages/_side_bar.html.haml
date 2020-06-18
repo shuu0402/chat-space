@@ -13,8 +13,8 @@
   .GroupList
     - current_user.groups.each do |group|
       .Group-name
-        = link_to '#' do
+        = link_to group_messages_path(group) do
           .Group-name__name
-            グループ名
+            = group.name
           .Group-name__message
-            最新のメッセージ
+            = group.show_last_message

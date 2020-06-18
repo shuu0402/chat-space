@@ -2,29 +2,25 @@
   .group-info
     .group-info__group
       .group-info__Name
-        グループ名
+        = @group.name
       %ul.group-info__member-list
         Member：
         %li.group-info__member
-          ユーザー名
-    = link_to edit_user_path(current_user),class: "group-info__edit" do
+          - @group.users.each do |user|
+            = user.name
+    = link_to edit_group_path(@group),class: "group-info__edit" do
       Edit
+       
+
 
   .Field
-    .message-list
-      .message-info
-        .message-info__user-name
-          ユーザー名
-        .message-info__date
-          2020/2/2 12:22
-      .message
-        %p.message__content
-          こんにちは
+    = render @messages
+
   .footer
-    %form.Form
+    = form_with model: [@group, @message], html: {class: "Form"}, local: true do |f|
       .Form__contents
-        %input.Form__content{type: 'text', placeholder: 'type a message'}
-        %label.Form__image
+        = f.text_field :content, class: 'Form__content', placeholder: 'type a message'
+        = f.label :image, class: 'Form__image' do
           = icon('far', 'image', class: 'Form__icon')
-          %input.Hidden{type: 'file'}
-      %input.Form__submit{type: 'submit', value: 'Send'}    
+          = f.file_field :image, class: 'Hidden'
+      = f.submit 'Send', class: 'Form__submit'
