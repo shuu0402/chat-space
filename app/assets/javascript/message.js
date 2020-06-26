@@ -2,36 +2,36 @@ $(function(){
   function buildHTML(message){
     if ( message.image ) {
       let html =
-        `<div class="MessageBox">
-          <div class="MessageInfo">
-            <div class="MessageInfo__userName">
+        `<div class="message_list">
+          <div class="message_info">
+            <div class="message_info__userName">
               ${message.user_name}
             </div>
-            <div class="MessageInfo__date">
+            <div class="message_info__date">
               ${message.created_at}
             </div>
           </div>
-          <div class="Message">
-            <p class="Message__content">
+          <div class="message">
+            <p class="message__content">
               ${message.content}
             </p>
-            <img class="Message__image" src="${message.image}">
+            <img class="message__image" src="${message.image}">
           </div>
         </div>`
       return html;
     } else {
       let html =
-      `<div class="MessageBox">
-        <div class="MessageInfo">
-          <div class="MessageInfo__userName">
+      `<div class="message_list">
+        <div class="message_info">
+          <div class="message_info__userName">
             ${message.user_name}
           </div>
-          <div class="MessageInfo__date">
+          <div class="message_info__date">
             ${message.created_at}
           </div>
         </div>
-        <div class="Message">
-          <p class="Message__content">
+        <div class="message">
+          <p class="message__content">
             ${message.content}
           </p>
         </div>
@@ -54,8 +54,9 @@ $(function(){
     })
     .done(function(data){
       let html = buildHTML(data);
-      $('.MessageField').append(html); 
-      $('.MessageField').animate({ scrollTop: $('.MessageField')[0].scrollHeight});     
+      console.log(html);
+      $('.Field').append(html); 
+      $('.Field').animate({ scrollTop: $('.Field')[0].scrollHeight});     
       $('form')[0].reset();
     })
   });
