@@ -2,12 +2,12 @@ $(function(){
   function buildHTML(message){
     if ( message.image ) {
       let html =
-        `<div class="message_list">
-          <div class="message_info">
-            <div class="message_info__userName">
+        `<div class="message-list">
+          <div class="message-info">
+            <div class="message-info__user-name">
               ${message.user_name}
             </div>
-            <div class="message_info__date">
+            <div class="message-info__date">
               ${message.created_at}
             </div>
           </div>
@@ -21,12 +21,12 @@ $(function(){
       return html;
     } else {
       let html =
-      `<div class="message_list">
-        <div class="message_info">
-          <div class="message_info__userName">
+      `<div class="message-list">
+        <div class="message-info">
+          <div class="message-info__user-name">
             ${message.user_name}
           </div>
-          <div class="message_info__date">
+          <div class="message-info__date">
             ${message.created_at}
           </div>
         </div>
@@ -54,10 +54,13 @@ $(function(){
     })
     .done(function(data){
       let html = buildHTML(data);
-      console.log(html);
-      $('.Field').append(html); 
-      $('.Field').animate({ scrollTop: $('.Field')[0].scrollHeight});     
-      $('form')[0].reset();
+      $('.Field').append(html);      
+      $('.Field').animate({ scrollTop: $('.Field')[0].scrollHeight});
+      $('.Form')[0].reset();
+      $('.Form__submit').prop('disabled', false);
     })
+    .fail(function() {
+      alert("メッセージ送信に失敗しました");
+  });
   });
 });
