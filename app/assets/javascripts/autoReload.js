@@ -2,36 +2,36 @@ $(function(){
   function buildHTML(message){
     if ( message.image ) {
       let html =
-        `<div class="MessageBox" data-message-id=${message.id}>
-          <div class="MessageInfo">
-            <div class="MessageInfo__userName">
+        `<div class="message-list" data-message-id=${message.id}>
+          <div class="message-info">
+            <div class="message-info__user-name">
               ${message.user_name}
             </div>
-            <div class="MessageInfo__date">
+            <div class="message-info__date">
               ${message.created_at}
             </div>
           </div>
-          <div class="Message">
-            <p class="Message__content">
+          <div class="message">
+            <p class="message__content">
               ${message.content}
             </p>
-            <img class="Message__image" src="${message.image}">
+            <img class="message__image" src="${message.image}">
           </div>
         </div>`
       return html;
     } else {
       let html =
-      `<div class="MessageBox" data-message-id=${message.id}>
+      `<div class="message-list" data-message-id=${message.id}>
         <div class="MessageInfo">
-          <div class="MessageInfo__userName">
+          <div class="message-info__user-name">
             ${message.user_name}
           </div>
-          <div class="MessageInfo__date">
+          <div class="message-info__date">
             ${message.created_at}
           </div>
         </div>
-        <div class="Message">
-          <p class="Message__content">
+        <div class="message">
+          <p class="message__content">
             ${message.content}
           </p>
         </div>
@@ -42,7 +42,7 @@ $(function(){
 
   let reloadMessages = function() {
     //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
-    let last_message_id = $('.MessageBox:last').data("message-id");
+    let last_message_id = $('.message-list:last').data("message-id") || 0;
     $.ajax({
       //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
       url: "api/messages",
@@ -62,8 +62,8 @@ $(function(){
           insertHTML += buildHTML(message)
         });
         //メッセージが入ったHTMLに、入れ物ごと追加
-        $('.MessageField').append(insertHTML);
-        $('.MessageField').animate({ scrollTop: $('.MessageField')[0].scrollHeight});
+        $('.Field').append(insertHTML);
+        $('.Field').animate({ scrollTop: $('.Field')[0].scrollHeight});
       }
     })
     .fail(function() {
